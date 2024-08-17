@@ -8,10 +8,6 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
     <style>
       body {
         background-color: #87b9eb;
@@ -27,48 +23,6 @@
       }
       .form-section {
         padding-top: 50px;
-      }
-      .form-section h2 {
-        margin-bottom: 20px;
-        color: #007bff;
-      }
-      .form-section p.lead {
-        margin-bottom: 30px;
-      }
-      .goal-benefits ul {
-        list-style-type: disc;
-        padding-left: 20px;
-      }
-      .goal-benefits ul li {
-        margin-bottom: 10px;
-      }
-      .goal-status {
-        margin-top: 40px;
-      }
-      .goal-status h3 {
-        color: #007bff;
-      }
-      .goal-status p.lead {
-        margin-bottom: 20px;
-      }
-      .goal-status .form-row {
-        margin-bottom: 20px;
-      }
-      .report-section h2,
-      .report-section h3 {
-        color: #007bff;
-      }
-      .report-section p.lead {
-        margin-bottom: 20px;
-      }
-      .chart-container {
-        position: relative;
-        margin: auto;
-        height: 40vh;
-        width: 80vw;
-      }
-      .table-responsive {
-        margin-top: 20px;
       }
       .footer {
         background-color: #28a745;
@@ -98,7 +52,6 @@
       <a class="navbar-brand" href="/dashboard.html"
         >Income & Expenses Tracker</a
       >
-      <div id="reportPage"></div>
       <button
         class="navbar-toggler"
         type="button"
@@ -113,7 +66,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="add-transaction.html">Add Transaction</a>
+            <a class="nav-link" href="#add-transaction">Add Transaction</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="budget.html">Budget</a>
@@ -122,7 +75,7 @@
             <a class="nav-link" href="goals.html">Goal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#reports">Reports</a>
+            <a class="nav-link" href="reports.html">Report</a>
           </li>
           <li class="nav-item">
             <a class="nav-link btn btn-primary" href="login.html">Log In</a>
@@ -131,71 +84,74 @@
       </div>
     </nav>
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-4">
       <div class="jumbotron">
         <h1 class="display-4">
           Welcome to the Smart Income & Expenses Tracker!
         </h1>
         <p class="lead">
-          Manage your income and expenses effortlessly. Generate detailed
-          reports to gain insights into your financial habits.
+          Manage your income and expenses effortlessly. Set budgets, track your
+          goals, and generate reports to stay on top of your finances.
         </p>
+        <hr class="my-4" />
+        <p>Get started now by adding your first transaction.</p>
+        <a class="btn btn-primary btn-lg" href="#add-transaction" role="button"
+          >Add Expenses</a
+        >
       </div>
 
-      <div id="reports" class="report-section mt-5">
-        <h2>Reports</h2>
-
-        <div class="mb-4">
-          <h3>Income Summary</h3>
-          <p class="lead">
-            Review your income details for the selected period.
-          </p>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>particulars</th>
-                  <th>Amount</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody id="transactionTbody"></tbody>
-            </table>
+      <div id="add-transaction" class="form-section">
+        <h2>Add Expenses</h2>
+        <form id="addExpenses">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input
+              type="date"
+              name="date"
+              class="form-control"
+              id="date"
+              required
+            />
           </div>
-        </div>
 
-        <div class="mb-4">
-          <h3>Expenses Summary</h3>
-          <p class="lead">
-            View a breakdown of your expenses for the selected period.
-          </p>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Particulars</th>
-                  <th>Total Budget</th>
-                  <th>Total Expense</th>
-                </tr>
-              </thead>
-              <tbody id="expeseSummaryTbody"></tbody>
-            </table>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" name="category" required>
+              <option value="">Select category</option>
+              <option value="Food">Food</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Utilities">Utilities</option>
+              <option value="other">Other</option>
+            </select>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input
+              name="amount"
+              type="number"
+              class="form-control"
+              id="amount"
+              placeholder="Enter amount"
+              required
+            />
+          </div>
 
-        <div class="mb-4">
-          <h3>Current Balance</h3>
-          <p class="lead">
-            Check your current balance and track your financial health.
-          </p>
-          <div class="alert alert-info" role="alert">
-            Your current balance is $3250.
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              name="description"
+              type="text"
+              class="form-control"
+              id="description"
+              placeholder="Enter description"
+            />
           </div>
-        </div>
+          <button type="submit" class="btn btn-primary">Add Expenses</button>
+        </form>
       </div>
     </div>
+    <!-- Footer Section -->
     <footer class="footer">
       <div class="container">
         <div class="row">

@@ -60,20 +60,103 @@ $("#addTransaction").on("submit", function (e) {
   });
 });
 
+$(document).ready(function () {
+  let reportPage = $("#reportPage");
+  if (reportPage.length) {
+    getBudgetReport();
+  }
+});
+
+function getBudgetReport() {
+  $.ajax({
+    url: "/api/auth/dashboard",
+    method: "GET",
+    datatype: "json",
+    // data: ,
+    success: function (data) {
+      createBudgetReportHtml(data.incomeResult);
+      createTransactionReportHtml(data.transactionResult);
+    },
+    error: function (error) {
+      alert("Registration failed");
+    },
+  });
+}
+
+function createBudgetReportHtml(data) {
+  let report = "";
+  console.log(data);
+  data.forEach((row) => {
+    report += `
+    <tr>
+      <td>N/A</td>
+
+      <td>${row.category_name}</td>
+      <td>$ ${row.totalbudget}</td>
+      <td>$ ${row.totalexpenses}</td>
+    </tr>
+    `;
+  });
+
+  $("#expeseSummaryTbody").append(report);
+  console.log("prepared report: ", report);
+}
+
+function createTransactionReportHtml(data) {
+  let report = "";
+  console.log(data);
+  data.forEach((row) => {
+    report += `
+    <tr>
+      <td>${row.tran_date}</td>
+      <td>${row.category_name}</td>
+      <td>$ ${row.tran_amount}</td>
+      <td>${row.tran_desc}</td>
+
+    </tr>
+    `;
+  });
+
+  $("#transactionTbody").append(report);
+  console.log("prepared report: ", report);
+}
+
+$("#addExpenses").on("submit", function (e) {
+  e.preventDefault();
+
+  const formData = $("#addExpenses").serialize();
+
+  $.ajax({
+    url: "/api/auth/addExpenses",
+    method: "POST",
+    datatype: "json",
+    data: formData,
+    success: function (data) {
+      alert("success");
+      // clearform()
+      // window.location.href = "add-transaction.html";
+    },
+    error: function (error) {
+      alert("Registration failed");
+    },
+  });
+});
+
 $("#budgetForm").on("submit", function (e) {
   e.preventDefault();
 
-  const month = $("month-budget").val();
-  const budgetCategory = $("#category-budget").val();
-  const budget = $("#amount-budget").val();
-  const notes = $("#notes-budget").val();
+  let formdata = $("#budgetForm").serialize();
 
   $.ajax({
     url: "/api/auth/addBudget",
     method: "POST",
-    data: { month, budgetCategory, budget, notes },
-    success: function (data) {
-      window.location.href = "budget.html";
+    dataType: "json",
+    data: formdata,
+    success: function (response) {
+      //  dont refesh page
+      // window.location.href = "budget.html";
+      // reset form
+      console.log(response);
     },
     error: function (error) {
       alert("Budget Adding failed");

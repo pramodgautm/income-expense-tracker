@@ -1,37 +1,45 @@
-const db = require('../config/db');
+const db = require("../config/db");
 
 exports.getDashboardData = (req, res) => {
-    const userId = req.user.id;
+  const userId = 1;
 
-    // Query to get total income
-    const incomeQuery = 'SELECT SUM(amount) AS totalIncome FROM income WHERE user_id = ?';
-    db.query(incomeQuery, [userId], (err, incomeResult) => {
-        if (err) return res.status(500).send('Server error');
+  // Query to get total income
+  const incomeQuery = `
+    SELECT c.category_name, SUM(budget) AS totalbudget, SUM(tran_amount) AS totalexpenses 
+    FROM budget_allocated b 
+    INNER JOIN transaction_table t ON t.user_id = b.user_id
+    INNER JOIN budget_categories c ON c.category_id = b.category_id 
+    WHERE b.user_id = ? 
+    GROUP BY c.category_name 
+  `;
 
-        const totalIncome = incomeResult[0].totalIncome || 0;
+  // Query to get transactions
+  const transactionQuery = `
+    SELECT category_name, tran_date, tran_amount, tran_desc 
+    FROM transaction_table tt
+    INNER JOIN budget_categories bc ON bc.category_id = tt.category 
+    WHERE tt.user_id = ?
+  `;
 
-        // Query to get total expenses
-        const expenseQuery = 'SELECT SUM(amount) AS totalExpenses FROM expenses WHERE user_id = ?';
-        db.query(expenseQuery, [userId], (err, expenseResult) => {
-            if (err) return res.status(500).send('Server error');
+  const connection = db.startDb();
 
-            const totalExpenses = expenseResult[0].totalExpenses || 0;
-            const netBalance = totalIncome - totalExpenses;
+  connection.all(incomeQuery, [userId], (err, incomeResult) => {
+    if (err) {
+      db.closeDb();
+      return res.status(500).send("Server error");
+    }
 
-            // Query to get recent transactions
-            const transactionQuery = 'SELECT date, category, description, amount FROM transactions WHERE user_id = ? ORDER BY date DESC LIMIT 10';
-            db.query(transactionQuery, [userId], (err, transactionResult) => {
-                if (err) return res.status(500).send('Server error');
+    connection.all(transactionQuery, [userId], (err, transactionResult) => {
+      if (err) {
+        db.closeDb();
+        return res.status(500).send("Server error");
+      }
 
-                const transactions = transactionResult;
-
-                res.status(200).json({
-                    totalIncome,
-                    totalExpenses,
-                    netBalance,
-                    transactions
-                });
-            });
-        });
+      db.closeDb();
+      res.status(200).json({
+        incomeResult,
+        transactionResult,
+      });
     });
+  });
 };

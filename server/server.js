@@ -25,7 +25,10 @@ app.use(express.static("public"));
 
 // Import routes
 const authRoutes = require("./routes/auth");
+const dashboardRoutes = require("./routes/dashboard");
+
 app.use("/api/auth", authRoutes);
+// app.use("/api/dashboard", dashboardRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

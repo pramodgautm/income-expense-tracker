@@ -117,6 +117,7 @@
             <div class="col-md-6 mb-3">
               <label for="month-budget">Month</label>
               <input
+                name="month"
                 type="month"
                 class="form-control"
                 id="month-budget"
@@ -128,13 +129,18 @@
           <div class="form-row">
             <div class="col-md-6 mb-3">
               <label for="category-budget">Category</label>
-              <select class="form-control" id="category-budget" required>
+              <select
+                name="category"
+                class="form-control"
+                id="category-budget"
+                required
+              >
                 <option value="">Select category</option>
-                <option value="food">Food</option>
-                <option value="transportation">Transportation</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="utilities">Utilities</option>
-                <option value="other">Other</option>
+                <option value="1">Food</option>
+                <option value="2">Transportation</option>
+                <option value="3">Entertainment</option>
+                <option value="4">Utilities</option>
+                <option value="5">Other</option>
               </select>
               <div class="invalid-feedback">Please select a category.</div>
             </div>
@@ -143,6 +149,7 @@
             <div class="col-md-6 mb-3">
               <label for="amount-budget">Amount</label>
               <input
+                name="amount"
                 type="number"
                 class="form-control"
                 id="amount-budget"
@@ -156,6 +163,7 @@
             <div class="col-md-6 mb-3">
               <label for="notes-budget">Notes</label>
               <textarea
+                name="notes"
                 class="form-control"
                 id="notes-budget"
                 rows="3"
@@ -166,23 +174,22 @@
           <button type="submit" class="btn btn-primary">Set Budget</button>
         </form>
         <hr class="my-4" />
-        <h3>Current Budget Status</h3>
-        <p class="lead">
+        <!-- <h3>Current Budget Status</h3> -->
+        <!-- <p class="lead">
           Track your spending against your set budget. Here you can see how much
           you've spent in each category for the month and adjust your budget
           accordingly.
-        </p>
-        <div class="budget-status">
+        </p> -->
+        <!-- <div class="budget-status">
           <div class="form-row">
             <div class="col-md-6 mb-3">
               <label for="status-category">Category</label>
               <select class="form-control" id="status-category">
-                <option value="all">All</option>
-                <option value="food">Food</option>
-                <option value="transportation">Transportation</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="utilities">Utilities</option>
-                <option value="other">Other</option>
+                <option value="1">Food</option>
+                <option value="2">Transportation</option>
+                <option value="3">Entertainment</option>
+                <option value="4">Utilities</option>
+                <option value="5">Other</option>
               </select>
             </div>
           </div>
@@ -198,7 +205,15 @@
           >
             View Status
           </button>
-        </div>
+        </div> -->
+
+        <!-- dialog section.  -->
+        <!-- <button id="openDialogBtn" style="display: none">Open Dialog</button>
+        <dialog id="myDialog">
+          <span class="close-btn">×</span>
+          <p>This is an open dialog window</p>
+          <p>data fetched about budget is to be shown here.</p>
+        </dialog> -->
       </div>
     </div>
     <!-- Footer Section -->
