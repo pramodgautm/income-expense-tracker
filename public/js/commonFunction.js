@@ -60,6 +60,7 @@ $("#addTransaction").on("submit", function (e) {
   });
 });
 
+// comment
 $(document).ready(function () {
   let reportPage = $("#reportPage");
   if (reportPage.length) {
