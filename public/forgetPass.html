@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forget Password</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .form-section {
+        max-width: 500px;
+        margin: auto;
+        padding-top: 50px;
+      }
+      .form-section h2 {
+        margin-bottom: 20px;
+        color: #007bff;
+      }
+      .form-group label {
+        font-weight: bold;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="form-section">
+        <h2>Forget Password</h2>
+        <form class="needs-validation" novalidate>
+          <div class="form-group">
+            <label for="contact">Registered Contact Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="contact"
+              placeholder="Enter your registered contact number"
+              required
+            />
+            <div class="invalid-feedback">
+              Please enter your registered contact number.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="otp">Enter OTP</label>
+            <input
+              type="text"
+              class="form-control"
+              id="otp"
+              placeholder="Enter the OTP received"
+              required
+            />
+            <div class="invalid-feedback">Please enter the OTP.</div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // Custom form validation
+      (function () {
+        "use strict";
+        var forms = document.querySelectorAll(".needs-validation");
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener(
+            "submit",
+            function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              // Validate contact number
+              var contactInput = document.getElementById("contact");
+              if (!validateContactNumber(contactInput.value)) {
+                contactInput.classList.add("is-invalid");
+                event.preventDefault();
+                event.stopPropagation();
+              } else {
+                contactInput.classList.remove("is-invalid");
+                contactInput.classList.add("is-valid");
+              }
+
+              // Validate OTP
+              var otpInput = document.getElementById("otp");
+              if (!otpInput.value.trim().match(/^\d{6}$/)) {
+                otpInput.classList.add("is-invalid");
+                event.preventDefault();
+                event.stopPropagation();
+              } else {
+                otpInput.classList.remove("is-invalid");
+                otpInput.classList.add("is-valid");
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+
+        function validateContactNumber(contact) {
+          return /^\d{10}$/.test(contact);
+        }
+      })();
+    </script>
+  </body>
+</html>
