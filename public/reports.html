@@ -113,10 +113,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="add-transaction.html">Add Transaction</a>
+            <a class="nav-link" href="add-transaction.html">Expenses</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="budget.html">Budget</a>
+            <a class="nav-link" href="budget.html">Income</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="goals.html">Goal</a>
@@ -157,7 +157,6 @@
                   <th>Date</th>
                   <th>particulars</th>
                   <th>Amount</th>
-                  <th>Description</th>
                 </tr>
               </thead>
               <tbody id="transactionTbody"></tbody>
@@ -176,8 +175,8 @@
                 <tr>
                   <th>Date</th>
                   <th>Particulars</th>
-                  <th>Total Budget</th>
-                  <th>Total Expense</th>
+                  <th>Expense</th>
+                  <th>Description</th>
                 </tr>
               </thead>
               <tbody id="expeseSummaryTbody"></tbody>
@@ -191,7 +190,7 @@
             Check your current balance and track your financial health.
           </p>
           <div class="alert alert-info" role="alert">
-            Your current balance is $3250.
+            Your current balance is <span id="totalBudgetSummary"></span>.
           </div>
         </div>
       </div>

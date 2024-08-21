@@ -12,14 +12,15 @@ VALUES
     (1, 'Transportation'),
     (1, 'Entertainment'),
     (1, 'Utilities'),
-    (1, 'Other'),
-    (2, 'Food'),
-    (2, 'Transportation'),
-    (2, 'Entertainment'),
-    (2, 'Utilities'),
-    (2, 'Other'),
-    (3, 'Food'),
-    (3, 'Transportation'),
-    (3, 'Entertainment'),
-    (3, 'Utilities'),
-    (3, 'Other');
+    (1, 'Other');
+
+
+INSERT INTO budget_categories (user_id, category_name)
+VALUES
+    (1, 'Salary'),
+    (1, 'Business Income'),
+    (1, 'Investments'),
+    (1, 'Freelancing'),
+    (1, 'Gifts');
+
+

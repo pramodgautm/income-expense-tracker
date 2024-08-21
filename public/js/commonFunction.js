@@ -77,6 +77,7 @@ function getBudgetReport() {
     success: function (data) {
       createBudgetReportHtml(data.incomeResult);
       createTransactionReportHtml(data.transactionResult);
+      calculateTotal(data.totalResult);
     },
     error: function (error) {
       alert("Registration failed");
@@ -90,17 +91,16 @@ function createBudgetReportHtml(data) {
   data.forEach((row) => {
     report += `
     <tr>
-      <td>N/A</td>
-
+      <td>${row.tran_date}</td>
       <td>${row.category_name}</td>
-      <td>$ ${row.totalbudget}</td>
-      <td>$ ${row.totalexpenses}</td>
+      <td>$ ${row.tran_amount}</td>
+      <td>${row.tran_desc}</td>
     </tr>
     `;
   });
 
   $("#expeseSummaryTbody").append(report);
-  console.log("prepared report: ", report);
+  // console.log("prepared report: ", report);
 }
 
 function createTransactionReportHtml(data) {
@@ -109,17 +109,22 @@ function createTransactionReportHtml(data) {
   data.forEach((row) => {
     report += `
     <tr>
-      <td>${row.tran_date}</td>
+      <td>${row.month}</td>
       <td>${row.category_name}</td>
-      <td>$ ${row.tran_amount}</td>
-      <td>${row.tran_desc}</td>
-
+      <td>$ ${row.total_budget}</td>
     </tr>
     `;
   });
 
   $("#transactionTbody").append(report);
-  console.log("prepared report: ", report);
+  // console.log("prepared report: ", report);
+}
+
+function calculateTotal(totalData) {
+  let total = totalData.total_budget - totalData.total_transactions;
+  console.log("total-report", total);
+
+  $("#totalBudgetSummary").text(total);
 }
 
 $("#addExpenses").on("submit", function (e) {
@@ -158,6 +163,9 @@ $("#budgetForm").on("submit", function (e) {
       // window.location.href = "budget.html";
       // reset form
       console.log(response);
+      if (response.status) {
+        alert("Success");
+      }
     },
     error: function (error) {
       alert("Budget Adding failed");
