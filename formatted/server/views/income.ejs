@@ -1,0 +1,48 @@
+<!-- /views/income.ejs -->
+<div id="budget" class="form-section">
+    <h2>Income</h2>
+    <p class="lead">Set your monthly budget to manage your expenses and stay on track with your financial goals. You can allocate a specific amount for each category and monitor your spending.</p>
+    <form class="needs-validation" id="budgetForm">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="month-budget">Month</label>
+                <input name="month" type="month" class="form-control" id="month-budget" required />
+                <div class="invalid-feedback">Please select a month.</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="category-budget">Category</label>
+                <select name="category" class="form-control" id="category-budget" required>
+                    <option value="">Select category</option>
+                    <option value="6">Salary</option>
+                    <option value="7">Business Income</option>
+                    <option value="8">Investment</option>
+                    <option value="9">Freelancing</option>
+                    <option value="10">Gifts</option>
+                </select>
+                <div class="invalid-feedback">Please select a category.</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="amount-budget">Amount</label>
+                <input name="amount" type="number" class="form-control" id="amount-budget" placeholder="Enter budget amount" required />
+                <div class="invalid-feedback">Please enter an amount.</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="notes-budget">Notes</label>
+                <textarea name="notes" class="form-control" id="notes-budget" rows="3" placeholder="Add any notes or details about this budget (optional)"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Income</button>
+    </form>
+    <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+    });
+    </script>
+</div>
+

@@ -1,0 +1,18 @@
+<!-- /views/login.ejs -->
+<h1>Login</h1>
+<% if (error) { %>
+  <p style="color: red;">Invalid credentials, please try again.</p>
+<% } %>
+<% if (locals.registered) { %>
+  <p style="color: green;">Registration successful. Please log in.</p>
+<% } %>
+<form action="/login" method="POST">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required>
+  <br>
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+  <br>
+  <button type="submit">Login</button>
+</form>
+<p>Don't have an account? <a href="/register">Register</a></p>
