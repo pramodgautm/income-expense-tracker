@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+const db = require("../config/db");
 
 router.use(bodyParser.json());
 
